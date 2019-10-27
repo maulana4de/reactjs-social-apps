@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb://maulana_87:S3ph4n1249@clustersocialappsdb-shard-00-00-rzrwa.mongodb.net:27017,clustersocialappsdb-shard-00-01-rzrwa.mongodb.net:27017,clustersocialappsdb-shard-00-02-rzrwa.mongodb.net:27017/test?ssl=true&replicaSet=ClusterSocialAppsDB-shard-0&authSource=admin&retryWrites=true&w=majority",
+  "jwtSecret": "s3ph4n1249"
+}
