@@ -1,20 +1,29 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const auth = require("../../middleware/auth");
+const auth = require('../../middleware/auth');
 
-const ProfileModel = require('../../models/Profile')
-const UserModel = require('../../models/User')
+const ProfileModel = require('../../models/Profile');
+const UserModel = require('../../models/User');
 
 // @route     GET api/profile/me
 // @desc      Get current users profile
 // @access    Private
-router.get("/", auth, async (req, res) => {
-    try {
-        const profile = await ProfileModel.findOne({user: req.user.id })
-    } catch (err) {
-        console.error(err.message)
-        res.status(500).send('Server Error')
+router.get('/me', auth, async (req, res) => {
+  try {
+    const profile = await ProfileModel.findOne({ user: req.user.id }).populate(
+      'user',
+      ['name', 'avatar']
+    );
+
+    if (!profile) {
+      return res.status(400).json({ msg: 'There is no profile for this user' });
     }
-}
+
+    res.json(profile);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;
